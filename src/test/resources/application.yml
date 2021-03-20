@@ -19,6 +19,6 @@ spring:
 
 
 logging:
-  level: 
+  level:
     org.hibernate.SQL: debug  # hibernate 생성하는 로그는 모두 기록
     org.hibernate.type: trace # 쿼리 날릴 때 쿼리파라미터 로깅 하지만 그래도 부족하다면 gradle에 외부라이브러리 설정 추가
