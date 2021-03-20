@@ -25,5 +25,5 @@ public class Member {
     // 마치 그 값을 거울처럼 바라보는 값이 된다. ( 즉, 읽기 전용 )
     // Order에 있는 Member member값을 변경해야지만 바뀌게 된다.
     @OneToMany(mappedBy = "member")  // member : orders = 1 : N
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>(); // 컬렉션의 경우 필드에서 바로 초기화 하는 것이 안전하다.
 }

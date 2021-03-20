@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter @Setter
 public class OrderItem {
@@ -14,11 +16,11 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne               // Order Item : Order
+    @ManyToOne(fetch = LAZY)              // Order Item : Order
     @JoinColumn(name = "order_id")  // FK가 있는 OrderItem에서 매핑 시켜줌
     private Order order;
 

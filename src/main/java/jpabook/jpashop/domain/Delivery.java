@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter @Setter
 public class Delivery {
@@ -14,7 +16,7 @@ public class Delivery {
     private Long id;
 
     // 매핑 시켜줄 변수 ( 하나의 주문 당 하나의 배송정보 ) - 거울
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)    // One to One도 Default가 EAGER이기 때문에 LAZY로 변경
     private Order order;
 
     @Embedded
