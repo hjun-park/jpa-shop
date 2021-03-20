@@ -25,6 +25,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-devtools' 				// thymeleaf 내용이 바뀌면 빠르게 적용 해주는 기능으로 사용
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'	// 쿼리 로깅
 
+	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
+
+
 	implementation 'junit:junit:4.12'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
