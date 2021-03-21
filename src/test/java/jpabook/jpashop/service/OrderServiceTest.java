@@ -88,7 +88,7 @@ public class OrderServiceTest {
         Assert.assertEquals("주문이 취소된 재고는 그만큼 증가해야 한다.", 10, item.getStockQuantity());
 
     }
-    
+
     private Book createBook(String name, int price, int stockQuantity) {
         Book book = new Book();
         book.setName(name);     // 인자로 만들게 하려면 Command + Option + P 를 누르면 파라미터로 뺄 수 있음
