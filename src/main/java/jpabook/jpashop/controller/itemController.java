@@ -77,7 +77,7 @@ public class itemController {
     }
 
     @PostMapping("items/{itemId}/edit")
-    public String updateItem(@PathVariable String itemId, @ModelAttribute("form") BookForm form) {
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
         // updateItemForm 7번째 줄에 Object "form"이 그대로 넘어와서 ModelAttribute 사용
 
         Book book = new Book();
@@ -88,17 +88,31 @@ public class itemController {
             2. Command + Shift + U 눌러서 변수 앞자리만 대문자 만들기
          */
 
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
+        /* Merge (병합) 방식 : */
+        // dirty checking과는 다르게 준영속 상태의 엔티티를 영속 상태로 만들어준다.
+        // 자세한 내용은 김영한 님 강의 참고(PDF북)
+        // 병합은 조심해야할 점이 있다.
+        // 변경 감지 기능 (dirty checking)은 일부 원하는 속성만 선택해서 변경할 수 있지만
+        // 병합의 경우 모든 속성이 변경된다. 병합시 값이 없으면 null로 업데이트할 위험도 있다. ( 병합은 모든 필드를 교체함 )
+        // 그러기 때문에 병합을 쓰기보다는 변경감지 기능을 쓰는 것이 실무에서 제일 좋다. ( 즉, merge를 쓰지 마라 )
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+
+
+        /*
+            더 나은 설계 방법
+         */
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
+
+        /*
+            수정할 게 좀 많다고 하면 Dto를 만든다 ( UpdateDto )
+         */
 
         itemService.saveItem(book); // saveitem => save => merge가 있는데 그거는 어떤 건지 ?
         return "redirect:/items";        // edit 하고나면 item 리스트로 리다이렉트
-
     }
-
-
 }
